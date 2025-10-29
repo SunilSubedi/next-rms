@@ -1,4 +1,4 @@
-
+"use client"
 import React from 'react'
 import { Food } from '@prisma/client'
 import Image from 'next/image'

@@ -6,7 +6,7 @@ import { columns } from './columns'
 import { redirect } from 'next/navigation'
 import Link from 'next/link'
 
-export default async function page() {
+export default async function Page() {
     
   const foods = await getAllFoods()
   if(foods.length <= 0)

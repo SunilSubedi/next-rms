@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 
-export default function page() {
+export default function Page() {
   return (
      <div className=" flex-col p-2 ">
         <div className="flex">

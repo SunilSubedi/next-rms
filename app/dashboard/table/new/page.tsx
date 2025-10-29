@@ -9,7 +9,7 @@ interface TableProps{
     seats: number,
 }
 
-export default function page() {
+export default function Page() {
     const { register, handleSubmit, reset, formState: { isSubmitting}} = useForm<TableProps>();
     const [isAdded, setIsAdded] = useState<boolean>(false)
     async function formSubmmited(data:TableProps){

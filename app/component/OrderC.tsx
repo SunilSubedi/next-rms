@@ -13,7 +13,7 @@ export default function OrderC({data}: OrderCProps ) {
 
     const [selectedFood, setSelectedFood] = useState<any[]>([])
 
-    const handleAdd = (food:any ) => {
+    const handleAdd = (food: Food ) => {
         setSelectedFood([...selectedFood, food]);
         console.log("Added To Selected Foods", selectedFood)
     }
