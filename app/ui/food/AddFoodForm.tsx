@@ -6,17 +6,23 @@ import Image from 'next/image'
 
 import { addFood } from '@/app/actions/addFood'
 
+interface FoodFormData {
+  name: string;
+  description?: string;
+  price: number | string; // string if coming from input
+  image?: FileList;
+}
 
 export default function AddFoodForm() {
 
-    const { register, handleSubmit, watch, reset, formState: {isSubmitting} } = useForm() 
+    const { register, handleSubmit, watch, reset, formState: {isSubmitting} } = useForm<FoodFormData>(); 
     const [preview, setPreview]= useState<string | null>()
     const [ isAdded, setIsAdded] = useState<boolean>(false)
 
     const  imageFile = watch("image");
     
 
-    const  foodSubmit = async (data: any) => {
+    const  foodSubmit = async (data: FoodFormData) => {
 
            try
            {
