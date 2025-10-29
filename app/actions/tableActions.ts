@@ -2,7 +2,10 @@
 import { db } from '@/lib/db'
 import { Table } from '@prisma/client'
 
-
+interface TableInput {
+  number: number | string; // can be string if coming from form input
+  seats: number | string;
+}
 
 export async function getTables():Promise<Table[]> {
     try
@@ -17,7 +20,7 @@ export async function getTables():Promise<Table[]> {
     
 }
 
-export async function postTable(tableData:any): Promise<boolean> {
+export async function postTable(tableData:TableInput): Promise<boolean> {
 
     try
     {

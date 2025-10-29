@@ -5,7 +5,12 @@ import { uploadToLocal } from '@/lib/upload'
 
 
 
-
+interface FoodInput {
+  name: string;
+  description?: string;
+  price: number | string; // can be string if coming from form
+  image?: FileList;       // the uploaded file(s)
+}
 
 
 
@@ -27,7 +32,7 @@ export  async function getAllFoods(): Promise<Food[]> {
 
 
 
-export  async function addFood(fooddata: any): Promise<boolean> {
+export  async function addFood(fooddata: FoodInput): Promise<boolean> {
 
   
     try

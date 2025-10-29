@@ -11,7 +11,7 @@ interface OrderCProps{
 
 export default function OrderC({data}: OrderCProps ) {
 
-    const [selectedFood, setSelectedFood] = useState<any[]>([])
+    const [selectedFood, setSelectedFood] = useState<Food[]>([])
 
     const handleAdd = (food: Food ) => {
         setSelectedFood([...selectedFood, food]);
