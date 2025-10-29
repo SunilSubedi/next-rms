@@ -1,3 +1,4 @@
+"use client"
 import React from "react";
 import Link from "next/link";
 
@@ -9,6 +10,7 @@ export default function SideBar() {
         { name: "Orders", href: "/dashboard/orders" },
         { name: "Customers", href: "/dashboard/customers" },
         { name: "Food", href: "/dashboard/food" },
+        { name: "Table", href:"/dashboard/table"},
         { name: "Reports", href: "/dashboard/reports" },
         { name: "Profile", href: "/dashboard/profile" },
         { name: "Setting", href: "/dashboard/setting" },
