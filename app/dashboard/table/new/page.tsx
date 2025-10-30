@@ -3,16 +3,14 @@ import React from 'react'
 import { useForm } from 'react-hook-form'
 import { useState } from 'react';
 import { postTable } from '@/app/actions/tableActions';
+import { TableInput } from '@/types/tableTypes';
 
-interface TableProps{
-    number: number,
-    seats: number,
-}
+
 
 export default function Page() {
-    const { register, handleSubmit, reset, formState: { isSubmitting}} = useForm<TableProps>();
+    const { register, handleSubmit, reset, formState: { isSubmitting}} = useForm<TableInput>();
     const [isAdded, setIsAdded] = useState<boolean>(false)
-    async function formSubmmited(data:TableProps){
+    async function formSubmmited(data:TableInput){
 
             try
             {

@@ -1,10 +1,10 @@
 "use client"
 import React from 'react'
-import { Food } from '@prisma/client'
+import { FoodData } from '@/types/foodTypes'
 
 
 interface FoodProps{
-   data : Food[]
+   data : FoodData[]
 }
 
 export default function OrderForm({data}: FoodProps) {

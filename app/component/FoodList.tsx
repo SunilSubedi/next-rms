@@ -1,11 +1,11 @@
 "use client"
 import React from 'react'
-import { Food } from '@prisma/client'
+import { FoodData } from '@/types/foodTypes';
 import Image from 'next/image'
 
 interface FoodListProps {
-    data: Food[];
-    onAdd: (food: Food) => void;
+    data: FoodData[];
+    onAdd: (food: FoodData) => void;
 }
 
 export default function FoodList({data, onAdd}: FoodListProps) {

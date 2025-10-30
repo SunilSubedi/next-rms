@@ -2,20 +2,20 @@
 import React from 'react'
 import FoodList from './FoodList'
 import OrderForm from './OrderForm'
-import { Food } from '@prisma/client'
+import { FoodData } from '@/types/foodTypes'
 import { useState } from 'react'
 
 interface OrderCProps{
-    data: Food[];
+    data: FoodData[];
 }
 
 export default function OrderC({data}: OrderCProps ) {
 
-    const [selectedFood, setSelectedFood] = useState<Food[]>([])
+    const [selectedFood, setSelectedFood] = useState<FoodData[]>([])
 
-    const handleAdd = (food: Food ) => {
+    const handleAdd = (food: FoodData ) => {
         setSelectedFood([...selectedFood, food]);
-        console.log("Added To Selected Foods", selectedFood)
+        //console.log("Added To Selected Foods", selectedFood)
     }
 
   return (

@@ -3,15 +3,10 @@
 import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import Image from 'next/image'
+import { FoodFormData } from '@/types/foodTypes'
 
 import { addFood } from '@/app/actions/addFood'
 
-interface FoodFormData {
-  name: string;
-  description?: string;
-  price: number | string; // string if coming from input
-  image?: FileList;
-}
 
 export default function AddFoodForm() {
 

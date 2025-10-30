@@ -1,13 +1,9 @@
 "use server"
 import { db } from '@/lib/db'
-import { Table } from '@prisma/client'
+import { TableInput, TableData } from '@/types/tableTypes'
 
-interface TableInput {
-  number: number | string; // can be string if coming from form input
-  seats: number | string;
-}
 
-export async function getTables():Promise<Table[]> {
+export async function getTables():Promise<TableData[]> {
     try
     {
             const data = await db.table.findMany();

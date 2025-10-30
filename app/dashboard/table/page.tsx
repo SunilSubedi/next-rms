@@ -3,18 +3,12 @@ import React from 'react'
 import Link from 'next/link';
 import Table from '@/app/ui/table';
 import { getTables } from '@/app/actions/tableActions';
-
-interface TableSchema{
-    id: string,
-    number: number,
-    seats: number,
-    status: "AVAILABLE" | "OCCUPIED" | "RESERVED",
-  
-
-}
+import { TableData } from '@/types/tableTypes';
 
 
-const columns:{key: keyof TableSchema; label: string}[] =[
+
+
+const columns:{key: keyof TableData; label: string}[] =[
 
     { key:"number", label:"Table Number"},
     { key:"seats", label:"Seats"},

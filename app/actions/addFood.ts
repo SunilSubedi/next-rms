@@ -1,20 +1,13 @@
 "use server"
 import { db }  from "@/lib/db"
-import { Food } from "@prisma/client";
 import { uploadToLocal } from '@/lib/upload'
+import { FoodFormData, FoodData } from "@/types/foodTypes";
 
 
 
-interface FoodInput {
-  name: string;
-  description?: string;
-  price: number | string; // can be string if coming from form
-  image?: FileList;       // the uploaded file(s)
-}
 
 
-
-export  async function getAllFoods(): Promise<Food[]> {
+export  async function getAllFoods(): Promise<FoodData[]> {
 
     try
     {
@@ -32,7 +25,7 @@ export  async function getAllFoods(): Promise<Food[]> {
 
 
 
-export  async function addFood(fooddata: FoodInput): Promise<boolean> {
+export  async function addFood(fooddata: FoodFormData): Promise<boolean> {
 
   
     try
