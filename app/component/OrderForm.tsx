@@ -1,15 +1,23 @@
 "use client"
 import React from 'react'
-import { FoodData } from '@/types/foodTypes'
+import { OrderState } from '@/types/orderTypes'
 
 
-interface FoodProps{
-   data : FoodData[]
+interface OrderFormProps{
+   ordersItem: OrderState,
+   dispatch:React.Dispatch<any>
 }
 
-export default function OrderForm({data}: FoodProps) {
+export default function OrderForm({ordersItem, dispatch }: OrderFormProps) {
 
-  console.log(data)
+  
+
+  const handleClear = () =>{
+    console.log("Here")
+    dispatch({ type:'CLEAR'})
+
+  }
+
   return (
     <div className="bg-white rounded-2xl shadow p-6 flex flex-col justify-between">
         <div>
@@ -36,20 +44,26 @@ export default function OrderForm({data}: FoodProps) {
           <div>
             <h3 className="font-semibold mb-2 text-gray-700">Selected Items</h3>
             <ul className="space-y-2">
-              { data.map(food => (
+              { ordersItem.items.map(food => (
                   <li key={food.id} className="flex justify-between text-gray-600">
-                <span>{food.name}</span>
-                <span>${food.price}</span>
+                <span>{food.name} x <b>{food.quantity}</b>
+                </span>
+                <span>${food.price * food.quantity} </span>
                 </li>
 
               ))}
             
              
             </ul>
-
+            { ordersItem.items.length > 0 && (
+            <div className=' text-center'>
+              
+             <button onClick={handleClear} className='p-2 bg-red-300 text-sm'>Clear</button>
+             </div>
+             )}
             <div className="border-t mt-3 pt-3 flex justify-between font-semibold text-gray-800">
               <span>Total</span>
-              <span>{data.reduce((sum, food) => sum + food.price, 0)}</span>
+              <span>${ordersItem.items.reduce((sum, food) => sum + food.price * food.quantity, 0)}</span>
             </div>
           </div>
         </div>
