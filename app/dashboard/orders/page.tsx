@@ -2,27 +2,27 @@ import React from 'react'
 import Link from 'next/link'
 import { fetchOrders } from '@/app/actions/orderAction'
 import OrderListClient from '@/app/component/OrderListClient';
+import type { OrderView, OrderItemView } from '@/types/orderTypes'
 
 export default async  function Page() {
 
-    const orders = await fetchOrders();
+    const orders: OrderView[] = await fetchOrders();
     console.log('Fetched orders:', orders);
-        const serialized =  orders.map((order: any) => ({
-            id: order.id,
-            customerName: order.customerName,
-            tableNumber: order.tableNumber,
-            totalAmount: order.totalAmount,
-            createdAt: order.createdAt?.toISOString() ?? null,
-            updatedAt: order.updatedAt?.toISOString() ?? null,  
-            orderItems: order.orderItems.map((item: any) => ({
-                id: item.id,
-                itemName: item.itemName,
-                quantity: item.quantity,
-                subtotal: item.subtotal,
-            })),
-            status: (orders as any).status ?? "PENDING",
-                  
-        }))
+    const serialized = orders.map((order: OrderView) => ({
+      id: order.id,
+      customerName: order.customerName,
+      tableNumber: order.tableNumber,
+      totalAmount: order.totalAmount,
+      createdAt: order.createdAt?.toISOString() ?? null,
+      updatedAt: order.updatedAt?.toISOString() ?? null,
+      orderItems: order.orderItems.map((item: OrderItemView) => ({
+        id: item.id,
+        itemName: item.itemName,
+        quantity: item.quantity,
+        subtotal: item.subtotal,
+      })),
+  status: (order as unknown as { status?: string }).status ?? 'PENDING',
+    }))
 
   return (
      <div className=" flex-col p-2 ">

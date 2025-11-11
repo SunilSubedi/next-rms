@@ -25,7 +25,7 @@ export default function OrderListClient({ orders }: { orders: Order[] }) {
   const [updating, setUpdating] = useState<Record<string, boolean>>({})
   const [payingFor, setPayingFor] = useState<string | null>(null)
   const [paymentAmount, setPaymentAmount] = useState<string>("")
-  const [paymentMethod, setPaymentMethod] = useState<"CASH" | "CARD">("CARD")
+  const [paymentMethod, setPaymentMethod] = useState<"CASH" | "CARD" | "ONLINE">("CARD")
 
   async function changeStatus(id: string, status: string) {
     setUpdating((s) => ({ ...s, [id]: true }))
@@ -134,9 +134,10 @@ export default function OrderListClient({ orders }: { orders: Order[] }) {
                   placeholder="Amount"
                   className="w-1/2 border rounded px-2 py-1"
                 />
-                <select value={paymentMethod} onChange={(e) => setPaymentMethod(e.target.value as any)} className="border rounded px-2 py-1">
+                <select value={paymentMethod} onChange={(e) => setPaymentMethod(e.target.value as 'CASH' | 'CARD' | 'ONLINE')} className="border rounded px-2 py-1">
                   <option value="CASH">Cash</option>
                   <option value="CARD">Card</option>
+                  <option value="ONLINE">Online</option>
                 </select>
               </div>
               <div className="mt-2 flex gap-2">

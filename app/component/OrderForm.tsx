@@ -1,14 +1,13 @@
 "use client"
 import React, { useState } from 'react'
-import { OrderState } from '@/types/orderTypes'
+import { OrderState, OrderAction, OrderInput } from '@/types/orderTypes'
 import { TableData } from '@/types/tableTypes'
-import { OrderInput } from '@/types/orderTypes'
 import { useRouter } from 'next/navigation'
 
 
 interface OrderFormProps{
    ordersItem: OrderState,
-   dispatch:React.Dispatch<any>
+  dispatch: React.Dispatch<OrderAction>
    tables: TableData[]
     createOrder: ( payload: OrderInput) => Promise<boolean>;
 }
@@ -70,8 +69,10 @@ export default function OrderForm({ordersItem, dispatch, tables, createOrder }: 
 
   // delta can be +1 or -1; this computes new quantity and clamps to >=1
   const handleUpdate = ( itemId: string, delta: number) => {
-     
-      dispatch({ type: 'UPDATE_QUANTITY', payload: { id: itemId, quantity: delta }})
+      const item = ordersItem.items.find(i => i.id === itemId)
+      if (!item) return
+      const newQty = Math.max(1, item.quantity + delta)
+      dispatch({ type: 'UPDATE_QUANTITY', payload: { id: itemId, quantity: newQty }})
   }
 
   const handleClear = () =>{
