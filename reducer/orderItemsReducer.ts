@@ -32,19 +32,53 @@ export function orderReducer(state: OrderState, action: OrderAction)
 
             };
         }
+
         case "CLEAR":
             {
                 return{
                     ...state, items:[], total:0
                 }
             }
-        // case "REMOVE_ITEM":
-        //     console.log("Item deleted", state.total)
-        //     return {
-                
-        //     }
-        // case "UPDATE_QUANTITY":
-        //     console.log("Items Updated")
+        case "REMOVE_ITEM":
+            {
+                 const updatedItems = state.items.filter( item => item.id !== action.payload)
+                 const updatedTotal = updatedItems.reduce((sum, item) => sum + item.price, 0)
+
+                 return{
+                    ...state,
+                    items: updatedItems,
+                    total: updatedTotal
+
+                 };
+            }
+       
+       case "UPDATE_QUANTITY":
+        {
+             const updatedItems = state.items.map( item  =>{
+                 if(item.id == action.payload.id)
+                 {
+                    return{
+                        ...item,
+                        quantity: item.quantity - action.payload.quantity
+                    };
+                }
+                return item;
+        });
+         
+            const filterItems = updatedItems.filter( item => item.quantity >= 1)
+            const updatedTotal = filterItems.reduce((sum, item) => sum + item.price, 0)
+
+            return{
+                ...state,
+                items: filterItems,
+                total: updatedTotal
+            }
+
+
+        }
+
+
+        
         //     return state;
         // case "clear":
            

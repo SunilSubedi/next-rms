@@ -5,16 +5,21 @@ import OrderForm from './OrderForm'
 import { FoodData } from '@/types/foodTypes'
 import { useReducer } from 'react'
 import { orderReducer, initialstate } from '@/reducer/orderItemsReducer'
-import { OrderItem } from '@/types/orderTypes'
+import { OrderInput } from '@/types/orderTypes'
+import { TableData } from '@/types/tableTypes'
 
 interface OrderCProps{
     data: FoodData[];
+    tables: TableData[];
+    createOrder: ( payload: OrderInput) => Promise<boolean>;
+    
+    
     
 }
 
 
 
-export default function OrderC({data}: OrderCProps ) {
+export default function OrderC({data, tables, createOrder}: OrderCProps ) {
 
     const [state, dispatch] = useReducer(orderReducer, initialstate);
 
@@ -26,7 +31,7 @@ export default function OrderC({data}: OrderCProps ) {
   return (
             <div className="grid grid-cols-2 gap-6 p-8 min-h-screen bg-gray-50">
                 <FoodList data={data} onAdd = {handleAdd} />
-                <OrderForm  ordersItem={state} dispatch={dispatch}/>
+                <OrderForm  createOrder= { createOrder} ordersItem={state} dispatch={dispatch} tables={tables}/>
             </div>
   )
     
