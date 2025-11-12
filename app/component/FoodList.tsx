@@ -1,7 +1,8 @@
 "use client"
 import React from 'react'
-import { FoodData } from '@/types/foodTypes';
+//import { OrderItem } from '@/types/orderTypes';
 import Image from 'next/image'
+import { FoodData } from '@/types/foodTypes';
 
 interface FoodListProps {
     data: FoodData[];

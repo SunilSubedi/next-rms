@@ -3,25 +3,35 @@ import React from 'react'
 import FoodList from './FoodList'
 import OrderForm from './OrderForm'
 import { FoodData } from '@/types/foodTypes'
-import { useState } from 'react'
+import { useReducer } from 'react'
+import { orderReducer, initialstate } from '@/reducer/orderItemsReducer'
+import { OrderInput } from '@/types/orderTypes'
+import { TableData } from '@/types/tableTypes'
 
 interface OrderCProps{
     data: FoodData[];
+    tables: TableData[];
+    createOrder: ( payload: OrderInput) => Promise<boolean>;
+    
+    
+    
 }
 
-export default function OrderC({data}: OrderCProps ) {
 
-    const [selectedFood, setSelectedFood] = useState<FoodData[]>([])
 
-    const handleAdd = (food: FoodData ) => {
-        setSelectedFood([...selectedFood, food]);
-        //console.log("Added To Selected Foods", selectedFood)
+export default function OrderC({data, tables, createOrder}: OrderCProps ) {
+
+    const [state, dispatch] = useReducer(orderReducer, initialstate);
+
+    const handleAdd = (item: FoodData) => {
+        dispatch({ type:'ADD_ITEM', payload: {...item, quantity : 1}})
     }
+    
 
   return (
             <div className="grid grid-cols-2 gap-6 p-8 min-h-screen bg-gray-50">
                 <FoodList data={data} onAdd = {handleAdd} />
-                <OrderForm data={selectedFood}/>
+                <OrderForm  createOrder= { createOrder} ordersItem={state} dispatch={dispatch} tables={tables}/>
             </div>
   )
     
